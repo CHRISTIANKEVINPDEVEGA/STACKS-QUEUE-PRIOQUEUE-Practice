@@ -1,26 +1,26 @@
 from collections import deque
 
 class Queue:
-    def __init__(self, *elements):
-        self._elements = deque(elements)
+    def __init__(storage, *elements):
+        storage._elements = deque(elements)
 
-    def __len__(self):
-        return len(self._elements)
+    def __len__(storage):
+        return len(storage._elements)
     
-    def __iter__(self):
-        while len(self) > 0:
-            yield self.dequeue()
+    def __iter__(storage):
+        while len(storage) > 0:
+            yield storage.dequeue()
 
-    def enqueue(self,element):
-        self._elements.append(element)
+    def enqueue(storage,input):
+        storage._elements.append(input)
 
-    def dequeue(self):
-        return self._elements.popleft()
+    def dequeue(storage):
+        return storage._elements.popleft()
 
-fifo=Queue("Una","Pangalwa","Pangatlo")
-print(len(fifo))
+inventory_fifo=Queue("Una","Pangalwa","Pangatlo")
+print(len(inventory_fifo))
 
-for element in fifo:
+for element in inventory_fifo:
     print(element)
 
-print(len(fifo))
+print(len(inventory_fifo))
