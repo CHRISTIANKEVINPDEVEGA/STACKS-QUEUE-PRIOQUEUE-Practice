@@ -9,3 +9,12 @@ class Queue:
 
     def dequeue(self):
         return self._elements.popleft()
+
+fifo=Queue()
+fifo.enqueue("una sa linya")
+fifo.enqueue("pangalwa sa linya")
+fifo.enqueue("pangtalo sa linya")
+
+print(fifo.dequeue())
+print(fifo.dequeue())
+print(fifo.dequeue())
