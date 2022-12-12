@@ -1,4 +1,6 @@
 from collections import deque
+from heapq import heappush
+from heapq import heappop
 
 class Queue:
     def __init__(storage, *input):
@@ -20,3 +22,14 @@ class Queue:
 class Stack(Queue):
     def dequeue(storage):
         return storage._elements.pop()
+
+class PriorityQueue:
+    def __init__(storage):
+        storage._elements= []
+    
+    def enqueueprio(storage, prioritylvl, input):
+        heappush(storage._elements, (prioritylvl,input))
+
+    def dequeueprio(storage):
+        return heappop(storage._elements)
+
