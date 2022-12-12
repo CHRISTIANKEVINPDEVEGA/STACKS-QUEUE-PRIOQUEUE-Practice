@@ -34,5 +34,5 @@ class PriorityQueue:
         heappush(storage._elements, value)
 
     def dequeueprio(storage):
-        return heappop(storage._elements)[1]
+        return heappop(storage._elements)[2]
 
