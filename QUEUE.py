@@ -1,6 +1,7 @@
 from collections import deque
 from heapq import heappush
 from heapq import heappop
+from itertools import count
 
 class Queue:
     def __init__(storage, *input):
@@ -26,9 +27,11 @@ class Stack(Queue):
 class PriorityQueue:
     def __init__(storage):
         storage._elements= []
+        storage._counter= count()
     
     def enqueueprio(storage, prioritylvl, input):
-        heappush(storage._elements, (-prioritylvl , input))
+        value = (-prioritylvl ,next(storage._counter), input)
+        heappush(storage._elements, value)
 
     def dequeueprio(storage):
         return heappop(storage._elements)[1]
