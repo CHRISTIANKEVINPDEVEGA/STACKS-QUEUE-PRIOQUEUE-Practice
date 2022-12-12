@@ -28,8 +28,8 @@ class PriorityQueue:
         storage._elements= []
     
     def enqueueprio(storage, prioritylvl, input):
-        heappush(storage._elements, (prioritylvl,input))
+        heappush(storage._elements, (-prioritylvl , input))
 
     def dequeueprio(storage):
-        return heappop(storage._elements)
+        return heappop(storage._elements)[1]
 
