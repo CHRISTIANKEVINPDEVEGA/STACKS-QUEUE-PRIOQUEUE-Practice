@@ -1,8 +1,8 @@
 from collections import deque
 
 class Queue:
-    def __init__(storage, *elements):
-        storage._elements = deque(elements)
+    def __init__(storage, *input):
+        storage._elements = deque(input)
 
     def __len__(storage):
         return len(storage._elements)
@@ -17,4 +17,6 @@ class Queue:
     def dequeue(storage):
         return storage._elements.popleft()
 
-
+class Stack(Queue):
+    def dequeue(storage):
+        return storage._elements.pop()
