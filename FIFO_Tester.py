@@ -1,4 +1,3 @@
-
 from QUEUE import Queue
 
 inventory_fifo=Queue("Una","Pangalwa","Pangatlo")
