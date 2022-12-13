@@ -2,26 +2,26 @@ from typing import NamedTuple
 import networkx as nx
 
 
-class City_info(NamedTuple):
+class City_name(NamedTuple):
     name: str
     country: str
     year: int or None
     latitude: float
-    longtitude: float
+    longitude: float
 
     @classmethod
     def from_dict(cls,attrs):
         return cls(
             name=attrs["xlabel"],
             country=attrs["country"],
-            year=int(attrs["years"]) or None,
+            year=int(attrs["year"]) or None,
             latitude=float(attrs["latitude"]),
-            longtitude=float(attrs["longtitude"]),
+            longitude=float(attrs["longitude"]),
 
         )
 
 def graph_load(filename,node_factory):
-    graph = nx.nx_araph.read_dot(filename)
+    graph = nx.nx_agraph.read_dot(filename)
     nodes = {
         name:node_factory(attributes)
         for name,attributes in graph.nodes(data=True)
