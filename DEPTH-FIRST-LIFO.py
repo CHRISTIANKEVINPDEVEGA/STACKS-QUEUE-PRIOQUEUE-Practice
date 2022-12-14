@@ -10,5 +10,5 @@ for node in nx.dfs_tree(graph, nodes["edinburgh"]):
     if is_twentieth_century(node.year):
         print("Found:", node.name, node.year)
         break
-else:
-    print("Not found")
+    else:
+        print("Not found")
