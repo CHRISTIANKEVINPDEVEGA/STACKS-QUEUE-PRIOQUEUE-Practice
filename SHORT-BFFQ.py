@@ -1,5 +1,5 @@
 import networkx as nx
-from GRAPH import City_name, graph_load, shortest_path
+from GRAPH import City_name, graph_load, shortest_path, connected
 
 nodes, graph = graph_load("roadmap.dot", City_name.from_dict)
 
@@ -23,3 +23,11 @@ print(" -> ".join(
     city.name
     for city in shortest_path(graph, city1, city2, by_latitude)
 ))
+
+
+print("\n\n\n")
+
+
+print(connected(graph, nodes["belfast"], nodes["glasgow"]))
+
+print(connected(graph, nodes["belfast"], nodes["derry"]))
