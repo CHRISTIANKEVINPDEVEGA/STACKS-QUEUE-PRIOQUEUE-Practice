@@ -7,5 +7,6 @@ QUEUE_TYPES = {
     "heap": PriorityQueue
 }
 
-
+def main(args):
+    buffer = QUEUE_TYPES[args.queue]()
 
