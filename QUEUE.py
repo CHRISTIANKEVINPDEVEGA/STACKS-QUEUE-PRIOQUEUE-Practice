@@ -1,7 +1,8 @@
 from collections import deque
-from heapq import heappush
-from heapq import heappop
 from itertools import count
+from dataclasses import dataclass
+from heapq import heapify, heappop, heappush
+from typing import Any
 
 class IterableQue:
     def __len__(storage):
@@ -37,3 +38,30 @@ class PriorityQueue(IterableQue):
     def dequeue(storage):
         return heappop(storage._elements)[2]
 
+@dataclass(order=True)
+class Element:
+    priority: float
+    count: int
+    value: Any
+
+class MutableMinHeap(IterableQue):
+    def __init__(self):
+        super().__init__()
+        self._elements_by_value = {}
+        self._elements = []
+        self._counter = count()
+
+    def __setitem__(self, unique_value, priority):
+        if unique_value in self._elements_by_value:
+            self._elements_by_value[unique_value].priority = priority
+            heapify(self._elements)
+        else:
+            element = Element(priority, next(self._counter), unique_value)
+            self._elements_by_value[unique_value] = element
+            heappush(self._elements, element)
+
+    def __getitem__(self, unique_value):
+        return self._elements_by_value[unique_value].priority
+
+    def dequeue(self):
+        return heappop(self._elements).value
