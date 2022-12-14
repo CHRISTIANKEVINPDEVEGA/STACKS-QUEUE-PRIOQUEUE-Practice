@@ -9,6 +9,7 @@ from rich.columns import Columns
 from rich.console import Group
 from rich.live import Live
 from rich.panel import Panel
+from random import choice, randint
 
 
 QUEUE_TYPES = {
@@ -128,3 +129,15 @@ class View:
             padding + worker.state, align="left", vertical="middle"
         )
         return Panel(align, height=5, title=title)   
+
+class Producer(Worker):
+    def __init__(self, speed, buffer, products):
+        super().__init__(speed, buffer)
+        self.products = products
+
+    def run(self):
+        while True:
+            self.product = choice(self.products)
+            self.simulate_work()
+            self.buffer.put(self.product)
+            self.simulate_idle()
