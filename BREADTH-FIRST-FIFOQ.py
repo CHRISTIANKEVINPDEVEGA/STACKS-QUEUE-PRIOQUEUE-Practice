@@ -27,7 +27,7 @@ def is_twentieth_century(city):
 
 nodes, graph = graph_load("roadmap.dot", City_name.from_dict)
 city = bfs(graph, nodes["york"], is_twentieth_century)
-city.name
+print(city.name)
 
 
 for city in breadth_first_traverse(graph, nodes["york"]):
