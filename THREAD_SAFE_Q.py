@@ -10,6 +10,7 @@ from rich.console import Group
 from rich.live import Live
 from rich.panel import Panel
 
+
 QUEUE_TYPES = {
     "fifo": Queue,
     "lifo": LifoQueue,
@@ -93,3 +94,28 @@ class View:
         ) as live:
             while True:
                 live.update(self.render())
+    
+    def render(self):
+
+        match self.buffer:
+            case PriorityQueue():
+                title = "Priority Queue"
+                products = map(str, reversed(list(self.buffer.queue)))
+            case LifoQueue():
+                title = "Stack"
+                products = list(self.buffer.queue)
+            case Queue():
+                title = "Queue"
+                products = reversed(list(self.buffer.queue))
+            case _:
+                title = products = ""
+
+        rows = [
+            Panel(f"[bold]{title}:[/] {', '.join(products)}", width=82)
+        ]
+        pairs = zip_longest(self.producers, self.consumers)
+        for i, (producer, consumer) in enumerate(pairs, 1):
+            left_panel = self.panel(producer, f"Producer {i}")
+            right_panel = self.panel(consumer, f"Consumer {i}")
+            rows.append(Columns([left_panel, right_panel], width=40))
+        return Group(*rows)
