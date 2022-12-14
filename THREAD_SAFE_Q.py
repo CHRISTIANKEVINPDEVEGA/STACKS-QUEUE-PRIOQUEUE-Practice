@@ -10,6 +10,9 @@ from rich.console import Group
 from rich.live import Live
 from rich.panel import Panel
 from random import choice, randint
+from dataclasses import dataclass, field
+from enum import IntEnum
+
 
 
 QUEUE_TYPES = {
@@ -18,7 +21,24 @@ QUEUE_TYPES = {
     "heap": PriorityQueue
 }
 
+@dataclass(order=True)
+class Product:
+    priority: int
+    label: str = field(compare=False)
 
+    def __str__(self):
+        return self.label
+
+class Priority(IntEnum):
+    HIGH = 1
+    MEDIUM = 2
+    LOW = 3
+
+PRIORITIZED_PRODUCTS = (
+    Product(Priority.HIGH, ":1st_place_medal:"),
+    Product(Priority.MEDIUM, ":2nd_place_medal:"),
+    Product(Priority.LOW, ":3rd_place_medal:"),
+)
 
 PRODUCTS = (
     ":balloon:",
@@ -136,8 +156,9 @@ class Consumer(Worker):
 
 def main(args):
     buffer = QUEUE_TYPES[args.queue]()
+    products = PRIORITIZED_PRODUCTS if args.queue == "heap" else PRODUCTS
     producers = [
-        Producer(args.producer_speed, buffer, PRODUCTS)
+        Producer(args.producer_speed, buffer, products)
         for _ in range(args.producers)
     ]
     consumers = [
