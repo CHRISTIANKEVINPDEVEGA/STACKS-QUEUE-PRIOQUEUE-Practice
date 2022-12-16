@@ -32,4 +32,7 @@ async def fetch_html(session, url):
         if response.ok and response.content_type == "text/html":
             return await response.text()
 
+def parse_links(url, html):
+    soup = BeautifulSoup(html, features="html.parser")
+
    
