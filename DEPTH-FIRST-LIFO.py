@@ -13,6 +13,9 @@ for node in nx.dfs_tree(graph, nodes["edinburgh"]):
     else:
         print("Not found")
 
+def is_twentieth_century(city):
+    return city.year and 1901 <= city.year <= 2000
+
 nodes, graph = graph_load("roadmap.dot", City_name.from_dict)
 city = dfs(graph, nodes["edinburgh"], is_twentieth_century)
 print(city.name)
