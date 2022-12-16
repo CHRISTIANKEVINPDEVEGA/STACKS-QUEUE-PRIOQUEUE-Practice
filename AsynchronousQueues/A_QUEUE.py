@@ -46,4 +46,5 @@ def parse_links(url, html):
         if not href.startswith("javascript:"):
             yield urljoin(url, href)
 
-   
+async def worker(worker_id, session, queue, links, max_depth):
+    print(f"[{worker_id} starting]", file=sys.stderr)
