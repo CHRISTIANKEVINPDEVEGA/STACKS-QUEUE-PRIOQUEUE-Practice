@@ -8,6 +8,10 @@ import sys
 from typing import NamedTuple
 
 
+class Job(NamedTuple):
+    url: str
+    depth: int = 1
+
 async def main(args):
     session = aiohttp.ClientSession()   
     try:
