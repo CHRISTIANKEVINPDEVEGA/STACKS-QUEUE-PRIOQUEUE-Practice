@@ -2,6 +2,8 @@ import argparse
 import asyncio
 from collections import Counter
 import aiohttp
+from urllib.parse import urljoin
+from bs4 import BeautifulSoup
 
 async def main(args):
     session = aiohttp.ClientSession()   
@@ -23,4 +25,6 @@ def display(links):
         print(f"{count:>3} {url}")
 
 if __name__ == "__main__":
-    asyncio.run(main(parse_args()))   
+    asyncio.run(main(parse_args()))
+
+   
